@@ -1,8 +1,14 @@
 // GLOBAL HIDE UPPER KEYBOARD ON PAGE LOAD
 $('#keyboard-upper-container').hide();
 
-let i = 0;
-$('#sentence').append(sentences[i]);
+let sentences = ['ten ate neite ate nee enet ite ate inet ent eate', 
+                    'Too ato too nOt enot one totA not anot tOO aNot', 
+                    'oat itain oat tain nate eate tea anne inant nean', 
+                    'itant eate anot eat nato inate eat anot tain eat', 
+                    'nee ene ate ite tent tiet ent ine ene ete ene ate'];
+
+
+
 
 
 // TOGGLE UPPER AND LOWER KEYBOARDS ON SHIFT KEYDOWN/UP
@@ -28,14 +34,23 @@ $(document).keypress(function(event) {
     }, 100);
 });
 
-let sentences = ['ten ate neite ate nee enet ite ate inet ent eate', 
-                    'Too ato too nOt enot one totA not anot tOO aNot', 
-                    'oat itain oat tain nate eate tea anne inant nean', 
-                    'itant eate anot eat nato inate eat anot tain eat', 
-                    'nee ene ate ite tent tiet ent ine ene ete ene ate'];
 
- 
+let i = 0;
+let j = 0;
+$('#sentence').append(sentences[i]);
+for (let letter of sentences[i]) {
+    console.log(letter);
+}
 
+expectedLetter();
+expectedLetter();
+
+function expectedLetter() {
+    let nextLetter = sentences[i][j];
+    console.log(nextLetter);
+    j++;
+    return nextLetter;
+}
 
 
 // setTimeout(() => { }, 1000);
