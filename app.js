@@ -42,18 +42,21 @@ $(document).keypress(function(event) {
     letterCounter++;
 
     if (letterCounter == sentences[i].length) {
-        $('#sentence').remove(sentences[i]);
-        sentences[i].remove();
+        $('#sentence').empty();
         i++;
         j = 0;
         letterCounter = 0;
         $('#sentence').append(sentences[i]);
-    }
-
-    
+    };
 });
 
 
+function getNextLetter() {
+    nextLetter = sentences[i][j];
+    // console.log(nextLetter);
+    j++;
+    return nextLetter;
+}
 
 
 
@@ -63,12 +66,6 @@ $(document).keypress(function(event) {
 
 // let nextLetter = '';
 
-function getNextLetter() {
-    nextLetter = sentences[i][j];
-    // console.log(nextLetter);
-    j++;
-    return nextLetter;
-}
 
 
 // setTimeout(() => { }, 1000);
