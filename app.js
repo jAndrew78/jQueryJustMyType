@@ -38,18 +38,21 @@ $(document).keypress(function(event) {
 let i = 0;
 let j = 0;
 $('#sentence').append(sentences[i]);
-for (let letter of sentences[i]) {
-    console.log(letter);
-}
 
-expectedLetter();
-expectedLetter();
+// for (let letter of sentences[i]) {
+//     console.log(letter);
+// }
 
-function expectedLetter() {
-    let nextLetter = sentences[i][j];
+getNextLetter();
+getNextLetter();
+
+// let nextLetter = '';
+
+function getNextLetter() {
+    nextLetter = sentences[i][j];
     console.log(nextLetter);
+    // return nextLetter;
     j++;
-    return nextLetter;
 }
 
 
