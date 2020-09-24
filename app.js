@@ -32,6 +32,12 @@ $(document).keypress(function(event) {
     setTimeout(() => {
         $(`#${keyPress}`).css({backgroundColor: 'rgb(0,0,0,0'});
     }, 100);
+    getNextLetter();
+    if (keyPress == nextLetter.charCodeAt(0)) {
+        console.log('yes');
+    };
+
+    
 });
 
 
@@ -39,38 +45,21 @@ let i = 0;
 let j = 0;
 $('#sentence').append(sentences[i]);
 
-// for (let letter of sentences[i]) {
-//     console.log(letter);
-// }
 
-getNextLetter();
-getNextLetter();
+// getNextLetter();
+// getNextLetter();
+// console.log(nextLetter);
 
 // let nextLetter = '';
 
 function getNextLetter() {
     nextLetter = sentences[i][j];
-    console.log(nextLetter);
-    // return nextLetter;
+    // console.log(nextLetter);
     j++;
+    return nextLetter;
 }
 
 
 // setTimeout(() => { }, 1000);
-
-
-// for (let i = 0; i < sentences.length; i++) {
-//     const x = sentences[i];
-//     $('#sentence').append(x);
-//     setTimeout(() => { }, 1000);
-// }
-
-// // REMOVE HIGHLIGHTING ON KEYUP
-// $(document).keyup(function(event) {
-//     let keyUp = event.keyCode || event.which;
-//     console.log(keyUp);
-//     $(`#${keyUp}`).css({backgroundColor: 'rgb(0,0,0,0)'});
-//     }
-// );
 
 
