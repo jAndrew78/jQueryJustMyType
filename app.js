@@ -7,7 +7,10 @@ let sentences = ['ten ate neite ate nee enet ite ate inet ent eate',
                     'itant eate anot eat nato inate eat anot tain eat', 
                     'nee ene ate ite tent tiet ent ine ene ete ene ate'];
 
-
+let i = 0;
+let j = 0;
+letterCounter = 0;
+$('#sentence').append(sentences[i]);
 
 
 
@@ -27,7 +30,7 @@ $(document).keydown(function(e) {
 // HIGHLIGHT KEYS IN BROWSER WHEN PRESSED ON KEYBOARD, WAIT, REMOVE
 $(document).keypress(function(event) {
     let keyPress = event.keyCode || event.which;
-    console.log(keyPress);
+    // console.log(keyPress);
     $(`#${keyPress}`).css({backgroundColor: 'mediumslateblue'});
     setTimeout(() => {
         $(`#${keyPress}`).css({backgroundColor: 'rgb(0,0,0,0'});
@@ -36,14 +39,22 @@ $(document).keypress(function(event) {
     if (keyPress == nextLetter.charCodeAt(0)) {
         console.log('yes');
     };
+    letterCounter++;
+
+    if (letterCounter == sentences[i].length) {
+        $('#sentence').remove(sentences[i]);
+        sentences[i].remove();
+        i++;
+        j = 0;
+        letterCounter = 0;
+        $('#sentence').append(sentences[i]);
+    }
 
     
 });
 
 
-let i = 0;
-let j = 0;
-$('#sentence').append(sentences[i]);
+
 
 
 // getNextLetter();
