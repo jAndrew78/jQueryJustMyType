@@ -9,8 +9,14 @@ let sentences = ['ten ate neite ate nee enet ite ate inet ent eate',
 
 let i = 0;
 let j = 0;
+let q = 1;
 letterCounter = 0;
 $('#sentence').append(sentences[i]);
+let nextLetter = sentences[i][j];
+// let nextLetterPlus = sentences[i][q]
+$('#target-letter').append(nextLetter)
+                    
+// sentences[i][j].css(backgroundColor, 'mediumslateblue')
 
 
 
@@ -19,12 +25,12 @@ $(document).keydown(function(e) {
     if (e.keyCode == 16) {
         $('#keyboard-upper-container').show();
         $('#keyboard-lower-container').hide();
-    }
+    };
 }).keyup(function(e) {
     if (e.keyCode == 16) {
         $('#keyboard-upper-container').hide();
         $('#keyboard-lower-container').show();
-    }
+    };
 });
 
 // HIGHLIGHT KEYS IN BROWSER WHEN PRESSED ON KEYBOARD, WAIT, REMOVE
@@ -35,12 +41,16 @@ $(document).keypress(function(event) {
     setTimeout(() => {
         $(`#${keyPress}`).css({backgroundColor: 'rgb(0,0,0,0'});
     }, 100);
+    
     getNextLetter();
+    getNextExpectedLetter();
+    $('#target-letter').empty()
+    $('#target-letter').append(nextExpectedLetter)
     if (keyPress == nextLetter.charCodeAt(0)) {
         console.log('yes');
     };
-    letterCounter++;
 
+    letterCounter++;
     if (letterCounter == sentences[i].length) {
         $('#sentence').empty();
         i++;
@@ -51,11 +61,21 @@ $(document).keypress(function(event) {
 });
 
 
+
 function getNextLetter() {
     nextLetter = sentences[i][j];
     // console.log(nextLetter);
     j++;
     return nextLetter;
+};
+
+//This function needs to return nextLetter at start of each sentence and 
+//nextExpectedLetter the rest of the time
+//needs to return '<space>' on empty string
+function getNextExpectedLetter() {
+    nextExpectedLetter = sentences[i][q];
+    q++;
+    return nextExpectedLetter;
 }
 
 
@@ -65,6 +85,7 @@ function getNextLetter() {
 // console.log(nextLetter);
 
 // let nextLetter = '';
+
 
 
 
