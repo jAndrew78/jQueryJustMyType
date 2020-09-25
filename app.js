@@ -15,9 +15,9 @@ $('#sentence').append(sentences[i]);
 let nextLetter = sentences[i][j];
 // let nextLetterPlus = sentences[i][q]
 $('#target-letter').append(nextLetter)
-                    
-// sentences[i][j].css(backgroundColor, 'mediumslateblue')
 
+
+// sentences[i][j].css(backgroundColor, 'mediumslateblue')
 
 
 // TOGGLE UPPER AND LOWER KEYBOARDS ON SHIFT KEYDOWN/UP
@@ -46,13 +46,26 @@ $(document).keypress(function(event) {
     getNextExpectedLetter();
     $('#target-letter').empty()
     $('#target-letter').append(nextExpectedLetter)
-    if (keyPress == nextLetter.charCodeAt(0)) {
-        console.log('yes');
-    };
 
+    if (keyPress == nextLetter.charCodeAt(0)) {
+        // console.log('yes');
+        // placeGlyphicon();
+        
+        let $glyphOk = $('<span>').addClass('glyphicon glyphicon-ok')
+        console.log('yes');
+        $('#feedback').append($glyphOk);
+        
+    } else {
+        let $glyphRemove = $('<span>').addClass('glyphicon glyphicon-remove')
+        console.log('no');
+        $('#feedback').append($glyphRemove);
+    };
+    
+    
     letterCounter++;
     if (letterCounter == sentences[i].length) {
         $('#sentence').empty();
+        $('#feedback').empty();
         i++;
         j = 0;
         letterCounter = 0;
@@ -79,12 +92,19 @@ function getNextExpectedLetter() {
 }
 
 
+// let $glyphOk = $('<span>').addClass('glyphicon glyphicon-ok')
 
-// getNextLetter();
-// getNextLetter();
-// console.log(nextLetter);
-
-// let nextLetter = '';
+function placeGlyphicon() {
+    let $glyphOk = $('<span>').addClass('glyphicon glyphicon-ok')
+    let $glyphRemove = $('<span>').addClass('glyphicon glyphicon-remove')
+    if (keyPress == nextLetter.charCodeAt(0)) {
+        console.log('yes');
+        $('#feedback').append($glyphOk);
+    } else {
+        console.log('no');
+        $('#feedback').append($glyphRemove);
+    };
+};
 
 
 
