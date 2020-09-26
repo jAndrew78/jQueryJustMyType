@@ -1,24 +1,28 @@
 // GLOBAL HIDE UPPER KEYBOARD ON PAGE LOAD
 $('#keyboard-upper-container').hide();
 
-let wordsPerMinute = 60;
+let startTime;
+let startTiming = false;
+let numberOfWords = 54;
+let elapsedMinutes;
+let wordsPerMinute;
 let numberOfMistakes = 0;
 
-let sentences = ['ten ate ', 
-                    'Too ato ', 
-                    'oat itain ', 
-                    'itant eate ', 
-                    'nee ene',
-                    `Wow! You typed ${wordsPerMinute} words per minute 
-                    with ${numberOfMistakes} mistakes!!`];
-
-// let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ', 
-//                     'Too ato too nOt enot one totA not anot tOO aNot ', 
-//                     'oat itain oat tain nate eate tea anne inant nean ', 
-//                     'itant eate anot eat nato inate eat anot tain eat ', 
-//                     'nee ene ate ite tent tiet ent ine ene ete ene ate',
+// let sentences = ['ten ate ', 
+//                     'Too ato ', 
+//                     'oat itain ', 
+//                     'itant eate ', 
+//                     'nee ene',
 //                     `Wow! You typed ${wordsPerMinute} words per minute 
-//                                         with ${numberOfMistakes} mistakes!!`];
+//                     with ${numberOfMistakes} mistakes!!`];
+
+let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ', 
+                    'Too ato too nOt enot one totA not anot tOO aNot ', 
+                    'oat itain oat tain nate eate tea anne inant nean ', 
+                    'itant eate anot eat nato inate eat anot tain eat ', 
+                    'nee ene ate ite tent tiet ent ine ene ete ene ate',
+                    `Wow! You typed ${wordsPerMinute} words per minute 
+                                        with ${numberOfMistakes} mistakes!!`];
 
 // let sentences = ['tttttttttttttttttttttttttttttttttttttttttttttttt ', 
 //                     'Ttttttttttttttttttttttttttttttttttttttttttttttt ', 
@@ -61,8 +65,19 @@ $(document).keypress(function(event) {
     
     highlightPressedKey(keyPress);
 
+    if (startTiming == false) {
+        startTiming = true;
+        startTime = new Date().getTime();
+    }
+
     if (sentenceCounter == sentences.length) {
-        console.log('Over it!')
+        // console.log('Over it!')
+        let elapsedTime = new Date().getTime() - startTime;
+        elapsedMinutes = elapsedTime / 60000;
+        wordsPerMinute = numberOfWords / elapsedMinutes;
+
+        console.log(elapsedTime);
+        console.log(wordsPerMinute);
     } else {
 
         // sentences[i][j].css(backgroundColor, 'mediumslateblue')
