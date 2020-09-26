@@ -1,18 +1,24 @@
 // GLOBAL HIDE UPPER KEYBOARD ON PAGE LOAD
 $('#keyboard-upper-container').hide();
 
-// let sentences = ['ten ate ', 
-//                     'Too ato ', 
-//                     'oat itain ', 
-//                     'itant eate ', 
-//                     'nee ene'];
+let wordsPerMinute = 60;
+let numberOfMistakes = 0;
 
+let sentences = ['ten ate ', 
+                    'Too ato ', 
+                    'oat itain ', 
+                    'itant eate ', 
+                    'nee ene',
+                    `Wow! You typed ${wordsPerMinute} words per minute 
+                    with ${numberOfMistakes} mistakes!!`];
 
-let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ', 
-                    'Too ato too nOt enot one totA not anot tOO aNot ', 
-                    'oat itain oat tain nate eate tea anne inant nean ', 
-                    'itant eate anot eat nato inate eat anot tain eat ', 
-                    'nee ene ate ite tent tiet ent ine ene ete ene ate'];
+// let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ', 
+//                     'Too ato too nOt enot one totA not anot tOO aNot ', 
+//                     'oat itain oat tain nate eate tea anne inant nean ', 
+//                     'itant eate anot eat nato inate eat anot tain eat ', 
+//                     'nee ene ate ite tent tiet ent ine ene ete ene ate',
+//                     `Wow! You typed ${wordsPerMinute} words per minute 
+//                                         with ${numberOfMistakes} mistakes!!`];
 
 // let sentences = ['tttttttttttttttttttttttttttttttttttttttttttttttt ', 
 //                     'Ttttttttttttttttttttttttttttttttttttttttttttttt ', 
@@ -30,6 +36,7 @@ let yellowBlockCounter = 0;
 let nextLetter = sentences[i][j];
 $('#sentence').append(sentences[i]);
 $('#target-letter').append(nextLetter);
+
 
 
 
