@@ -2,6 +2,7 @@
 $('#keyboard-upper-container').hide();
 
 let startTime;
+let endGame = false;
 let startTiming = false;
 let numberOfWords = 54;
 let elapsedMinutes;
@@ -21,8 +22,9 @@ let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ',
                     'oat itain oat tain nate eate tea anne inant nean ', 
                     'itant eate anot eat nato inate eat anot tain eat ', 
                     'nee ene ate ite tent tiet ent ine ene ete ene ate',
-                    `Wow! You typed ${wordsPerMinute} words per minute 
-                                        with ${numberOfMistakes} mistakes!!`];
+                    // `Wow! You typed ${wordsPerMinute} words per minute 
+                    //             with ${numberOfMistakes} mistakes!!`,
+];
 
 // let sentences = ['tttttttttttttttttttttttttttttttttttttttttttttttt ', 
 //                     'Ttttttttttttttttttttttttttttttttttttttttttttttt ', 
@@ -35,7 +37,7 @@ let j = 0;
 let q = 1;
 let pixels = 20;
 let letterCounter = 0;
-let sentenceCounter = 1;
+let sentenceCounter = 0;
 let yellowBlockCounter = 0;
 let nextLetter = sentences[i][j];
 $('#sentence').append(sentences[i]);
@@ -65,19 +67,34 @@ $(document).keypress(function(event) {
     
     highlightPressedKey(keyPress);
 
+    // NEED TO RESET THIS WHEN THE GAME RESTARTS
     if (startTiming == false) {
         startTiming = true;
         startTime = new Date().getTime();
-    }
+    };
 
     if (sentenceCounter == sentences.length) {
-        // console.log('Over it!')
-        let elapsedTime = new Date().getTime() - startTime;
-        elapsedMinutes = elapsedTime / 60000;
-        wordsPerMinute = numberOfWords / elapsedMinutes;
+        if (endGame == false) {
 
-        console.log(elapsedTime);
-        console.log(wordsPerMinute);
+            endGame = true;
+            // console.log('Over it!');
+            let elapsedTime = new Date().getTime() - startTime;
+            elapsedMinutes = elapsedTime / 60000;
+            wordsPerMinute = parseInt(numberOfWords / elapsedMinutes);
+
+            let endGameMessage = `Wow! You typed ${wordsPerMinute} words per minute 
+                                    with ${numberOfMistakes} mistakes!!`;
+            
+            $('#sentence').append(endGameMessage);
+            
+            console.log(elapsedTime);
+            console.log(wordsPerMinute);
+
+            function float2int (value) {
+                return value | 0;
+            }
+
+        };
     } else {
 
         // sentences[i][j].css(backgroundColor, 'mediumslateblue')
@@ -143,6 +160,7 @@ function placeGlyphicon(keyPress) {
     } else {
         let $glyphRemove = $('<span>').addClass('glyphicon glyphicon-remove');
         $('#feedback').append($glyphRemove);
+        numberOfMistakes++;
     };
 };
 
