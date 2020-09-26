@@ -26,7 +26,7 @@ let q = 1;
 let letterCounter = 0;
 let nextLetter = sentences[i][j];
 $('#sentence').append(sentences[i]);
-$('#target-letter').append(nextLetter)
+$('#target-letter').append(nextLetter);
 
 
 // sentences[i][j].css(backgroundColor, 'mediumslateblue')
@@ -45,12 +45,12 @@ $(document).keydown(function(e) {
     };
 });
 
-// HIGHLIGHT KEYS IN BROWSER WHEN PRESSED ON KEYBOARD, WAIT, REMOVE
+
+// EVERYTHING THAT HAPPENS WHEN A KEY IS PRESSED
 $(document).keypress(function(event) {
     let keyPress = event.keyCode || event.which;
     highlightPressedKey(keyPress);
     getNextLetter();
-    // getNextExpectedLetter();
     placeNextExpectedLetter();
     placeGlyphicon(keyPress);
     
@@ -62,15 +62,20 @@ $(document).keypress(function(event) {
     };
 });
 
+
+
+// HIGHLIGHT KEYS IN BROWSER WHEN PRESSED ON KEYBOARD, WAIT, REMOVE
 function highlightPressedKey(keyPress) {
-    $(`#${keyPress}`).css({backgroundColor: 'rgb(150, 140, 240'});
+    $(`#${keyPress}`).css('background-color', 'rgb(150, 140, 240)');
     setTimeout(() => {
         $(`#${keyPress}`).css(
-            {backgroundColor: 'rgb(150, 140, 240, 0'}
+            'background-color', 'rgb(150, 140, 240, 0)'
         );
     }, 100);
 };
 
+
+// GET NEXT LETTER AND NEXT EXPECTED LETTER
 function getNextLetter() {
     nextLetter = sentences[i][j];
     nextExpectedLetter = sentences[i][q];
@@ -79,13 +84,8 @@ function getNextLetter() {
     // return nextLetter;
 };
 
-//This function needs to return nextLetter at start of each sentence and 
-//nextExpectedLetter the rest of the time
-//needs to return '<space>' on empty string
-function getNextExpectedLetter() {
-    // return nextExpectedLetter;
-};
 
+// PLACE NEXT EXPECTED IN TARGET DIV, SHOW SPACEBAR FOR SPACE
 function placeNextExpectedLetter() {
     $('#target-letter').empty();
     
@@ -95,22 +95,22 @@ function placeNextExpectedLetter() {
     } else {
         $('#target-letter').append(nextExpectedLetter)
     };
-}
+};
 
 
+// COMPARE keyPress TO nextLetter, PLACE GLYPHICON ICON IN FEEDBACK DIV 
 function placeGlyphicon(keyPress) {
     if (keyPress == nextLetter.charCodeAt(0)) {
-        let $glyphOk = $('<span>').addClass('glyphicon glyphicon-ok')
+        let $glyphOk = $('<span>').addClass('glyphicon glyphicon-ok');
         $('#feedback').append($glyphOk);
     } else {
-        let $glyphRemove = $('<span>').addClass('glyphicon glyphicon-remove')
+        let $glyphRemove = $('<span>').addClass('glyphicon glyphicon-remove');
         $('#feedback').append($glyphRemove);
     };
 };
 
+// RESET DISPLAY DIV AT END OF SENTENCE
 function resetDisplay() {
-    // letterCounter++;
-    // if (letterCounter == sentences[i].length) {
     $('#sentence').empty();
     $('#feedback').empty();
     i++;
@@ -121,23 +121,10 @@ function resetDisplay() {
 
     nextLetter = sentences[i][j];
     $('#target-letter').append(nextLetter);
-    // return i;
 };
 
-// };
 
 // setTimeout(() => { }, 1000);
 
 
-// THIS WAS IN KEYPRESS FUNCTION. REPLACED WITH placeGlyphicon(keyPress)
-// if (keyPress == nextLetter.charCodeAt(0)) {
-    // console.log('yes');
-    // };    
-    //     let $glyphOk = $('<span>').addClass('glyphicon glyphicon-ok')
-    //     $('#feedback').append($glyphOk);
-    
-    // } else {
-        //     let $glyphRemove = $('<span>').addClass('glyphicon glyphicon-remove')
-    //     $('#feedback').append($glyphRemove);
-    // };
     
