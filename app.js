@@ -25,13 +25,13 @@ let j = 0;
 let q = 1;
 let pixels = 20;
 let letterCounter = 0;
+let sentenceCounter = 1;
 let yellowBlockCounter = 0;
 let nextLetter = sentences[i][j];
 $('#sentence').append(sentences[i]);
 $('#target-letter').append(nextLetter);
 
 
-// sentences[i][j].css(backgroundColor, 'mediumslateblue')
 
 
 // TOGGLE UPPER AND LOWER KEYBOARDS ON SHIFT KEYDOWN/UP
@@ -52,35 +52,30 @@ $(document).keydown(function(e) {
 $(document).keypress(function(event) {
     let keyPress = event.keyCode || event.which;
     
-    moveYellowBlock();
     highlightPressedKey(keyPress);
-    getNextLetter();
-    placeNextExpectedLetter();
-    placeGlyphicon(keyPress);
-    
-    // Experiencing some lag after moving the if statement an letterCounter++ here.
-    // If it continues, move back to resetDisplay function.
-    letterCounter++;
-    if (letterCounter == sentences[i].length) {
-        resetDisplay();
+
+    if (sentenceCounter == sentences.length) {
+        console.log('Over it!')
+    } else {
+
+        // sentences[i][j].css(backgroundColor, 'mediumslateblue')
+        getNextLetter();
+        placeNextExpectedLetter();
+        placeGlyphicon(keyPress);
+        moveYellowBlock();
+        
+        // Experiencing some lag after moving the if statement and letterCounter++ here.
+        // If it continues, move back to resetDisplay function.
+        letterCounter++;
+        if (letterCounter == sentences[i].length) {
+            resetDisplay();
+        };
     };
+
+
 });
 
-
-
-function moveYellowBlock() {
-    let yellowBlock = $('#yellow-block')
-    pixels += 17.5;
-    yellowBlock.css('left', pixels)
-
-    yellowBlockCounter++;
-
-    if (yellowBlockCounter == sentences[i].length) {
-        pixels = 20;
-        yellowBlock.css('left', '20px')
-    };
-};
-
+// `numberOfWords / minutes - 2 * numberOfMistakes`
 
 // HIGHLIGHT KEYS IN BROWSER WHEN PRESSED ON KEYBOARD, WAIT, SET TO TRANSPARENT
 function highlightPressedKey(keyPress) {
@@ -93,6 +88,7 @@ function highlightPressedKey(keyPress) {
 };
 
 
+
 // GET NEXT LETTER AND NEXT EXPECTED LETTER
 function getNextLetter() {
     nextLetter = sentences[i][j];
@@ -103,7 +99,7 @@ function getNextLetter() {
 };
 
 
-// PLACE NEXT EXPECTED IN TARGET DIV, SHOW SPACEBAR FOR SPACE
+
 function placeNextExpectedLetter() {
     $('#target-letter').empty();
     
@@ -114,6 +110,7 @@ function placeNextExpectedLetter() {
         $('#target-letter').append(nextExpectedLetter)
     };
 };
+
 
 
 // COMPARE keyPress TO nextLetter, PLACE GLYPHICON ICON IN FEEDBACK DIV 
@@ -127,6 +124,26 @@ function placeGlyphicon(keyPress) {
     };
 };
 
+
+
+// MOVE YELLOW BLOCK ACROSS THE SCREEN, RESET AT END OF SENTENCE
+function moveYellowBlock() {
+    let yellowBlock = $('#yellow-block');
+    pixels += 17.5;
+    yellowBlock.css('left', pixels);
+
+    yellowBlockCounter++;
+
+    if (yellowBlockCounter == sentences[i].length) {
+        pixels = 20;
+        yellowBlock.css('left', '20px');
+        yellowBlockCounter = 0;
+    };
+};
+
+
+
+// PLACE NEXT EXPECTED IN TARGET DIV, SHOW SPACEBAR FOR SPACE
 // RESET DISPLAY DIV AT END OF SENTENCE
 function resetDisplay() {
     $('#sentence').empty();
@@ -135,11 +152,13 @@ function resetDisplay() {
     j = 0;
     q = 1;
     pixels = 20;
+    sentenceCounter++;
     letterCounter = 0;
     $('#sentence').append(sentences[i]);
 
     nextLetter = sentences[i][j];
     $('#target-letter').append(nextLetter);
+    // return i;
 };
 
 
