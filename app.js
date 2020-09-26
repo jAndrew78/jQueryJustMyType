@@ -9,6 +9,8 @@ let elapsedMinutes;
 let wordsPerMinute;
 let numberOfMistakes = 0;
 
+
+// SHORT SENTENCES FOR CONVENIENCE IN TESTING
 // let sentences = ['ten ate ', 
 //                     'Too ato ', 
 //                     'oat itain ', 
@@ -26,6 +28,7 @@ let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ',
                     //             with ${numberOfMistakes} mistakes!!`,
 ];
 
+// TESTING FOR LAG
 // let sentences = ['tttttttttttttttttttttttttttttttttttttttttttttttt ', 
 //                     'Ttttttttttttttttttttttttttttttttttttttttttttttt ', 
 //                     'otttttttttttttttttttttttttttttttttttttttttttttt ', 
@@ -43,7 +46,7 @@ let nextLetter = sentences[i][j];
 $('#sentence').append(sentences[i]);
 $('#target-letter').append(nextLetter);
 
-
+// setTimeout(() => { }, 1000);
 
 
 
@@ -73,48 +76,32 @@ $(document).keypress(function(event) {
         startTime = new Date().getTime();
     };
 
-    if (sentenceCounter == sentences.length) {
-        if (endGame == false) {
+    
+    // NEED TO RESET ENDGAME TO FALSE SOMEWHERE
+    // NEED TO REMOVE TEXT-ALIGN CENTER FROM #SENTENCES ON RESET
+    // NEED TO PUT YELLOW BOX BACK
+    // PROBABLY NEED TO PUT STARTING LETTER BACK IN #TARGET-LETTER
 
-            endGame = true;
-            // console.log('Over it!');
-            let elapsedTime = new Date().getTime() - startTime;
-            elapsedMinutes = elapsedTime / 60000;
-            wordsPerMinute = parseInt(numberOfWords / elapsedMinutes);
-
-            let endGameMessage = `Wow! You typed ${wordsPerMinute} words per minute 
-                                    with ${numberOfMistakes} mistakes!!`;
-            
-            $('#sentence').append(endGameMessage);
-            
-            console.log(elapsedTime);
-            console.log(wordsPerMinute);
-
-            function float2int (value) {
-                return value | 0;
-            }
-
-        };
-    } else {
-
+    
+    if (endGame == false) {
         // sentences[i][j].css(backgroundColor, 'mediumslateblue')
         getNextLetter();
         placeNextExpectedLetter();
         placeGlyphicon(keyPress);
         moveYellowBlock();
-        
+
         // Experiencing some lag after moving the if statement and letterCounter++ here.
         // If it continues, move back to resetDisplay function.
         letterCounter++;
         if (letterCounter == sentences[i].length) {
             resetDisplay();
         };
-    };
+    };    
 
 
 });
 
-// `numberOfWords / minutes - 2 * numberOfMistakes`
+
 
 // HIGHLIGHT KEYS IN BROWSER WHEN PRESSED ON KEYBOARD, WAIT, SET TO TRANSPARENT
 function highlightPressedKey(keyPress) {
@@ -139,6 +126,7 @@ function getNextLetter() {
 
 
 
+// PLACE NEXT EXPECTED IN TARGET DIV, SHOW SPACEBAR FOR SPACE
 function placeNextExpectedLetter() {
     $('#target-letter').empty();
     
@@ -183,7 +171,6 @@ function moveYellowBlock() {
 
 
 
-// PLACE NEXT EXPECTED IN TARGET DIV, SHOW SPACEBAR FOR SPACE
 // RESET DISPLAY DIV AT END OF SENTENCE
 function resetDisplay() {
     $('#sentence').empty();
@@ -195,14 +182,60 @@ function resetDisplay() {
     sentenceCounter++;
     letterCounter = 0;
     $('#sentence').append(sentences[i]);
-
-    nextLetter = sentences[i][j];
-    $('#target-letter').append(nextLetter);
-    // return i;
+    
+    if (sentenceCounter == sentences.length) {
+        endGameScenario();
+    } else {
+        nextLetter = sentences[i][j];
+        $('#target-letter').append(nextLetter);      
+    };
 };
 
 
-// setTimeout(() => { }, 1000);
+
+function endGameScenario() {    
+    endGame = true;
+    // console.log('Over it!');
+    let elapsedTime = new Date().getTime() - startTime;
+    elapsedMinutes = elapsedTime / 60000;
+    wordsPerMinute = parseInt(numberOfWords / elapsedMinutes);
+    
+    appendEndGameMessage();
+
+        
+};
 
 
+
+
+function appendEndGameMessage() {
+    if (wordsPerMinute > 50) {
+        wordsPerMinuteMessage = 
+            `Wow! You typed ${wordsPerMinute} words per minute,<br>`;
+    } else if (wordsPerMinute > 35 ){
+        wordsPerMinuteMessage = 
+            `Not bad! You typed ${wordsPerMinute} words per minute,<br>`
+    } else {
+        wordsPerMinuteMessage = 
+            `Ouch! You only typed ${wordsPerMinute} words per minute,<br>`
+    };
+
+    if (wordsPerMinute > 35) {
+        if (numberOfMistakes > 5) {
+            mistakesMessage = `but you also had ${numberOfMistakes} mistakes!`;
+        } else {
+            mistakesMessage = `and you only had ${numberOfMistakes} mistakes!`;
+        };
+    } else {
+        if (numberOfMistakes > 5) {
+            mistakesMessage = `and you had ${numberOfMistakes} mistakes!`;
+        } else {
+            mistakesMessage = `but at least you only had ${numberOfMistakes} mistakes!`;
+        };
+    };
+    
+    let endGameMessage = `${wordsPerMinuteMessage}${mistakesMessage}`;
+
+    $('#sentence').append(endGameMessage).css('text-align', 'center');
+};
     
