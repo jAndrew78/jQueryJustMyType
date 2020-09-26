@@ -23,7 +23,9 @@ let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ',
 let i = 0;
 let j = 0;
 let q = 1;
+let pixels = 20;
 let letterCounter = 0;
+let yellowBlockCounter = 0;
 let nextLetter = sentences[i][j];
 $('#sentence').append(sentences[i]);
 $('#target-letter').append(nextLetter);
@@ -49,6 +51,8 @@ $(document).keydown(function(e) {
 // EVERYTHING THAT HAPPENS WHEN A KEY IS PRESSED
 $(document).keypress(function(event) {
     let keyPress = event.keyCode || event.which;
+    
+    moveYellowBlock();
     highlightPressedKey(keyPress);
     getNextLetter();
     placeNextExpectedLetter();
@@ -64,7 +68,21 @@ $(document).keypress(function(event) {
 
 
 
-// HIGHLIGHT KEYS IN BROWSER WHEN PRESSED ON KEYBOARD, WAIT, REMOVE
+function moveYellowBlock() {
+    let yellowBlock = $('#yellow-block')
+    pixels += 17.5;
+    yellowBlock.css('left', pixels)
+
+    yellowBlockCounter++;
+
+    if (yellowBlockCounter == sentences[i].length) {
+        pixels = 20;
+        yellowBlock.css('left', '20px')
+    };
+};
+
+
+// HIGHLIGHT KEYS IN BROWSER WHEN PRESSED ON KEYBOARD, WAIT, SET TO TRANSPARENT
 function highlightPressedKey(keyPress) {
     $(`#${keyPress}`).css('background-color', 'rgb(150, 140, 240)');
     setTimeout(() => {
@@ -116,6 +134,7 @@ function resetDisplay() {
     i++;
     j = 0;
     q = 1;
+    pixels = 20;
     letterCounter = 0;
     $('#sentence').append(sentences[i]);
 
