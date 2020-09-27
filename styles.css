@@ -24,7 +24,7 @@ body {
   margin-top: 10px;
   width: 15px;
   height: 15px;
-  background-color: rgb(150, 140, 240, .5);
+  background-color: rgba(133, 133, 133, 0.5);
   left: 20px;
 }
 

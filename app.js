@@ -11,18 +11,18 @@ let numberOfMistakes = 0;
 
 
 // SHORT SENTENCES FOR CONVENIENCE IN TESTING
-let sentences = ['ten ate ', 
-                    'Too ato ', 
-                    'oat itain ', 
-                    'itant eate ', 
-                    'nee ene',];
+// let sentences = ['ten ate ', 
+//                     'Too ato ', 
+//                     'oat itain ', 
+//                     'itant eate ', 
+//                     'nee ene',];
 
-// let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ', 
-//                     'Too ato too nOt enot one totA not anot tOO aNot ', 
-//                     'oat itain oat tain nate eate tea anne inant nean ', 
-//                     'itant eate anot eat nato inate eat anot tain eat ', 
-//                     'nee ene ate ite tent tiet ent ine ene ete ene ate',
-// ];
+let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ', 
+                    'Too ato too nOt enot one totA not anot tOO aNot ', 
+                    'oat itain oat tain nate eate tea anne inant nean ', 
+                    'itant eate anot eat nato inate eat anot tain eat ', 
+                    'nee ene ate ite tent tiet ent ine ene ete ene ate',
+];
 
 // TESTING FOR LAG
 // let sentences = ['tttttttttttttttttttttttttttttttttttttttttttttttt ', 
@@ -42,7 +42,9 @@ let nextLetter = sentences[i][j];
 $('#sentence').append(sentences[i]);
 $('#target-letter').append(nextLetter);
 
-let keystroke = new Audio('typewriter-key.wav');
+let typewriterKeystrokeAudio = new Audio('typewriterKeystroke.wav');
+let typewriterBellAudio = new Audio('typewriterBell.wav');
+let typewriterBellAndCarriageAudio = new Audio('typewriterBellAndCarriage.wav');
 
 // setTimeout(() => { }, 1000);
 
@@ -66,7 +68,7 @@ $(document).keydown(function(e) {
 $(document).keypress(function(event) {
     let keyPress = event.keyCode || event.which;
 
-    keystroke.play();
+    typewriterKeystrokeAudio.play();
     
     highlightPressedKey(keyPress);
 
@@ -105,10 +107,10 @@ $(document).keypress(function(event) {
 
 // HIGHLIGHT KEYS IN BROWSER WHEN PRESSED ON KEYBOARD, WAIT, SET TO TRANSPARENT
 function highlightPressedKey(keyPress) {
-    $(`#${keyPress}`).css('background-color', 'rgb(150, 140, 240)');
+    $(`#${keyPress}`).css('border-color', 'rgb(0, 0, 0)');
     setTimeout(() => {
         $(`#${keyPress}`).css(
-            'background-color', 'white'
+            'border-color', 'rgb(255, 255, 255)'
         );
     }, 100);
 };
@@ -187,7 +189,8 @@ function resetDisplay() {
         endGameScenario();
     } else {
         nextLetter = sentences[i][j];
-        $('#target-letter').append(nextLetter);      
+        $('#target-letter').append(nextLetter);
+        typewriterBellAudio.play();
     };
 };
 
@@ -202,7 +205,8 @@ function endGameScenario() {
     wordsPerMinute = parseInt(numberOfWords / elapsedMinutes);
     
     appendEndGameMessage();
-    
+    typewriterBellAndCarriageAudio.play();
+
     let resetButton = $('<button id="reset-button"> Reset Game? </button>');
     resetButton.click(function() {
         location.reload();
@@ -210,7 +214,7 @@ function endGameScenario() {
 
     setTimeout(() => {
         $('#target-letter').append(resetButton);
-    }, 2000);
+    }, 2500);
     
 };
 
@@ -232,13 +236,21 @@ function appendEndGameMessage() {
     if (wordsPerMinute > 35) {
         if (numberOfMistakes > 5) {
             mistakesMessage = `but you also had ${numberOfMistakes} mistakes!`;
-        } else {
+        } else if (numberOfMistakes == 1) {
+            mistakesMessage = `and you only had 1 mistake!`;
+        } else if (numberOfMistakes == 0) { 
+            mistakesMessage = `and you didn't make any mistakes!`;
+        }else {
             mistakesMessage = `and you only had ${numberOfMistakes} mistakes!`;
         };
     } else {
         if (numberOfMistakes > 5) {
             mistakesMessage = `and you had ${numberOfMistakes} mistakes!`;
-        } else {
+        } else if (numberOfMistakes == 1) {
+            mistakesMessage = `but you only had 1 mistake!`;
+        } else if (numberOfMistakes == 0) { 
+            mistakesMessage = `but you didn't make any mistakes!`;
+        }else {
             mistakesMessage = `but at least you only had ${numberOfMistakes} mistakes!`;
         };
     };
