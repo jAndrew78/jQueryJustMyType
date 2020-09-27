@@ -58,6 +58,12 @@ $(document).keydown(function(e) {
 $(document).keypress(function(event) {
     let keyPress = event.keyCode || event.which;
 
+// $(document).on('click keypress', function(event) {
+//     if (event.type === 'keypress') {
+//         let keyPress = event.keyCode || event.which
+//         return keyPress;
+//     };
+
     // GAME FUNCTIONS TO RUN ON EVERY KEYSTROKE 
     highlightPressedKey(keyPress);
     typewriterKeystrokeAudio.play();
