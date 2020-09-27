@@ -171,7 +171,7 @@ function moveYellowBlock() {
 
 
 
-// RESET DISPLAY DIV AT END OF SENTENCE
+// RESET OR INCREMENT VARIABLES, RESET DISPLAY DIV AT END OF SENTENCE
 function resetDisplay() {
     $('#sentence').empty();
     $('#feedback').empty();
@@ -193,6 +193,7 @@ function resetDisplay() {
 
 
 
+// FIGURE WPM AND CALL END GAME FUNCTIONS / RESET OPTION
 function endGameScenario() {    
     endGame = true;
     // console.log('Over it!');
@@ -202,12 +203,23 @@ function endGameScenario() {
     
     appendEndGameMessage();
 
-        
+    setTimeout(() => {
+        let $resetButton = ('<button id = reset-button> Reset Game? </button>');
+        $('#target-letter').append($resetButton);
+        $resetButton.click(function() {
+            location.reload()
+        });   
+    }, 2000);
+
+    // $resetButton.hover({
+
+    // });
+
 };
 
 
 
-
+// SET AND APPEND END OF GAME MESSAGE 
 function appendEndGameMessage() {
     if (wordsPerMinute > 50) {
         wordsPerMinuteMessage = 
@@ -235,7 +247,6 @@ function appendEndGameMessage() {
     };
     
     let endGameMessage = `${wordsPerMinuteMessage}${mistakesMessage}`;
-
     $('#sentence').append(endGameMessage).css('text-align', 'center');
 };
     

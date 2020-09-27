@@ -53,3 +53,13 @@
 .glyphicon-remove {
   color : #CD2626
 }
+
+#reset-button {
+  border-radius: 10px;
+  padding: 0 5px;
+  background-color: rgb(150, 140, 240);
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 25px;
+  /* cursor: pointer; */
+}
