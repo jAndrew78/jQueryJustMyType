@@ -235,23 +235,23 @@ function appendEndGameMessage() {
 
     if (wordsPerMinute > 35) {
         if (numberOfMistakes > 5) {
-            mistakesMessage = `but you also had ${numberOfMistakes} mistakes!`;
+            mistakesMessage = `but you also made ${numberOfMistakes} mistakes!`;
         } else if (numberOfMistakes == 1) {
-            mistakesMessage = `and you only had 1 mistake!`;
+            mistakesMessage = `and you only made 1 mistake!`;
         } else if (numberOfMistakes == 0) { 
             mistakesMessage = `and you didn't make any mistakes!`;
         }else {
-            mistakesMessage = `and you only had ${numberOfMistakes} mistakes!`;
+            mistakesMessage = `and you only made ${numberOfMistakes} mistakes!`;
         };
     } else {
         if (numberOfMistakes > 5) {
-            mistakesMessage = `and you had ${numberOfMistakes} mistakes!`;
+            mistakesMessage = `and you made ${numberOfMistakes} mistakes!`;
         } else if (numberOfMistakes == 1) {
-            mistakesMessage = `but you only had 1 mistake!`;
+            mistakesMessage = `but at least you only made 1 mistake!`;
         } else if (numberOfMistakes == 0) { 
-            mistakesMessage = `but you didn't make any mistakes!`;
+            mistakesMessage = `but at least you didn't make any mistakes!`;
         }else {
-            mistakesMessage = `but at least you only had ${numberOfMistakes} mistakes!`;
+            mistakesMessage = `but at least you only made ${numberOfMistakes} mistakes!`;
         };
     };
     
