@@ -3,10 +3,20 @@
   padding: 0;	
 }
 
+body {
+  background-image: url(brushed-metal.jpg);
+}
+
 #prompt-container {
   font-family: Courier New, Courier, monospace;
   font-size: 24px;
   letter-spacing: 3px;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-top: 15px;
+  background-color: rgb(245, 245, 245);
+  height: 130px;
+  
 }
 
 #yellow-block {
@@ -14,12 +24,21 @@
   margin-top: 10px;
   width: 15px;
   height: 15px;
-  background-color: yellow;
+  background-color: rgb(150, 140, 240, .5);
   left: 20px;
 }
 
 .keyboard-container {
   margin-top: 200px;
+}
+
+.key {
+  background-image: linear-gradient(
+     rgba(0, 0, 0, 0.75), 
+     rgba(0, 0, 0, 0.75)), 
+     url(brushed-metal.jpg);
+  color: white;
+  font-weight: bold;
 }
 
 #target-letter {
@@ -31,6 +50,7 @@
   border: 1px solid black;
   border-radius: 10px;
   margin-top: 10px;
+  /* margin-bottom: 7.25px; */
 }
 
 .keys-row {
@@ -39,11 +59,13 @@
 }
 
 .spacebar {
-  padding: 12px
+  padding: 12px;
+  
 }
 
 #feedback {
   font-size: 15px;
+  height: 25px
 }
 
 .glyphicon-ok {
@@ -55,11 +77,14 @@
 }
 
 #reset-button {
+  background-image: linear-gradient(
+     rgba(255, 255, 255, 0.05), 
+     rgba(255, 255, 255, 0.05)), 
+     url(brushed-metal.jpg);
   border-radius: 10px;
   padding: 0 5px;
-  background-color: rgb(150, 140, 240);
   font-size: 25px;
   font-weight: bold;
-  margin-top: 25px;
-  /* cursor: pointer; */
+  position: relative;
+  bottom: 30px;
 }

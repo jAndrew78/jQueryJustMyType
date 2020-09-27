@@ -11,22 +11,18 @@ let numberOfMistakes = 0;
 
 
 // SHORT SENTENCES FOR CONVENIENCE IN TESTING
-// let sentences = ['ten ate ', 
-//                     'Too ato ', 
-//                     'oat itain ', 
-//                     'itant eate ', 
-//                     'nee ene',
-//                     `Wow! You typed ${wordsPerMinute} words per minute 
-//                     with ${numberOfMistakes} mistakes!!`];
+let sentences = ['ten ate ', 
+                    'Too ato ', 
+                    'oat itain ', 
+                    'itant eate ', 
+                    'nee ene',];
 
-let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ', 
-                    'Too ato too nOt enot one totA not anot tOO aNot ', 
-                    'oat itain oat tain nate eate tea anne inant nean ', 
-                    'itant eate anot eat nato inate eat anot tain eat ', 
-                    'nee ene ate ite tent tiet ent ine ene ete ene ate',
-                    // `Wow! You typed ${wordsPerMinute} words per minute 
-                    //             with ${numberOfMistakes} mistakes!!`,
-];
+// let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ', 
+//                     'Too ato too nOt enot one totA not anot tOO aNot ', 
+//                     'oat itain oat tain nate eate tea anne inant nean ', 
+//                     'itant eate anot eat nato inate eat anot tain eat ', 
+//                     'nee ene ate ite tent tiet ent ine ene ete ene ate',
+// ];
 
 // TESTING FOR LAG
 // let sentences = ['tttttttttttttttttttttttttttttttttttttttttttttttt ', 
@@ -45,6 +41,8 @@ let yellowBlockCounter = 0;
 let nextLetter = sentences[i][j];
 $('#sentence').append(sentences[i]);
 $('#target-letter').append(nextLetter);
+
+let keystroke = new Audio('typewriter-key.wav');
 
 // setTimeout(() => { }, 1000);
 
@@ -67,6 +65,8 @@ $(document).keydown(function(e) {
 // EVERYTHING THAT HAPPENS WHEN A KEY IS PRESSED
 $(document).keypress(function(event) {
     let keyPress = event.keyCode || event.which;
+
+    keystroke.play();
     
     highlightPressedKey(keyPress);
 
@@ -108,7 +108,7 @@ function highlightPressedKey(keyPress) {
     $(`#${keyPress}`).css('background-color', 'rgb(150, 140, 240)');
     setTimeout(() => {
         $(`#${keyPress}`).css(
-            'background-color', 'rgb(150, 140, 240, 0)'
+            'background-color', 'white'
         );
     }, 100);
 };
@@ -202,19 +202,16 @@ function endGameScenario() {
     wordsPerMinute = parseInt(numberOfWords / elapsedMinutes);
     
     appendEndGameMessage();
+    
+    let resetButton = $('<button id="reset-button"> Reset Game? </button>');
+    resetButton.click(function() {
+        location.reload();
+    })
 
     setTimeout(() => {
-        let $resetButton = ('<button id = reset-button> Reset Game? </button>');
-        $('#target-letter').append($resetButton);
-        $resetButton.click(function() {
-            location.reload()
-        });   
+        $('#target-letter').append(resetButton);
     }, 2000);
-
-    // $resetButton.hover({
-
-    // });
-
+    
 };
 
 
