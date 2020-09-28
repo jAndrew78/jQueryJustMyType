@@ -70,9 +70,12 @@ $(document).keypress(function(event) {
 //     if (event.type === 'keypress') {
 //         keyPress = event.keyCode || event.which;
 //     } else if (event.type === 'click') {
-//         $('key').click(function() {
-//             console.log('hi');
+//         $('.key').click(function() {
+//             keyPress = '';
+//             keyPress = $(this).attr('id')
+//             console.log(keyPress);
 //         })
+//     };
 
 
 //         // let clickedKey = $('key');
