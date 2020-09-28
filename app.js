@@ -2,19 +2,27 @@
 let startTime;
 let endGame = false;
 let startTiming = false;
-let numberOfWords = 54;
+let numberOfWords = 50;
 let elapsedMinutes;
 let wordsPerMinute;
 let numberOfMistakes = 0;
 
 
+// GLOBAL SENTENCES ARRAY (Lab Given Sentences)
+// let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ', 
+//                     'Too ato too nOt enot one totA not anot tOO aNot ', 
+//                     'oat itain oat tain nate eate tea anne inant nean ', 
+//                     'itant eate anot eat nato inate eat anot tain eat ', 
+//                     'nee ene ate ite tent tiet ent ine ene ete ene ate',
+// ];
+
 // GLOBAL SENTENCES ARRAY
-let sentences = ['ten ate neite ate nee enet ite ate inet ent eate ', 
-                    'Too ato too nOt enot one totA not anot tOO aNot ', 
-                    'oat itain oat tain nate eate tea anne inant nean ', 
-                    'itant eate anot eat nato inate eat anot tain eat ', 
-                    'nee ene ate ite tent tiet ent ine ene ete ene ate',
-];                    
+let sentences = ['All work and no play makes Jack a dull boy. ', 
+                 'All work and no play makes Jack a dull boy. ', 
+                 'All work and no play makes Jack a dull boy. ', 
+                 'All work and no play makes Jack a dull boy. ', 
+                 'All work and no play makes Jack a dull boy.',
+];
 
 
 // GLOBAL COUNTERS, ETC
@@ -53,15 +61,23 @@ $(document).keydown(function(e) {
     };
 });
 
-
+let keyPress;
 // DRIVE THE GAME BASED ON EVERYTHING THAT HAPPENS WHEN A KEY IS PRESSED
 $(document).keypress(function(event) {
     let keyPress = event.keyCode || event.which;
 
 // $(document).on('click keypress', function(event) {
 //     if (event.type === 'keypress') {
-//         let keyPress = event.keyCode || event.which
-//         return keyPress;
+//         keyPress = event.keyCode || event.which;
+//     } else if (event.type === 'click') {
+//         $('key').click(function() {
+//             console.log('hi');
+//         })
+
+
+//         // let clickedKey = $('key');
+//         // console.log(clickedKey);
+//         // keyPress = event.keyCode || event.which;    
 //     };
 
     // GAME FUNCTIONS TO RUN ON EVERY KEYSTROKE 

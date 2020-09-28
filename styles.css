@@ -16,12 +16,14 @@ body {
   margin-top: 15px;
   background-color: rgb(245, 245, 245);
   height: 130px;
+  text-align: center;
   
 }
 
 #yellow-block {
   position: absolute;
   margin-top: 10px;
+  margin-left: 65px;
   width: 15px;
   height: 15px;
   background-color: rgba(133, 133, 133, 0.5);
@@ -69,13 +71,11 @@ body {
 }
 
 .glyphicon-ok {
-  color: #1DA237
-  /* color:  */
+  color: rgba(133, 133, 133, 0.6)
 }
 
 .glyphicon-remove {
-  color : #CD2626
-  /* color:  */
+  color : rgba(133, 133, 133, 0.9)
 }
 
 #reset-button {
