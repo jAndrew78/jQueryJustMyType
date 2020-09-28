@@ -67,7 +67,7 @@ $(document).keypress(function(event) {
     
 
 // WORKING ON ALLOWING CLICKS TO REGISTER ONSCREEN THE SAME AS VIA KEYPRESSES
-//   may need to seperate click and keypress into different event listeners
+//   may decide to seperate click and keypress into different event listeners
 // let keyPress;
 // $(document).on('click keypress', function(event) {
 //     if (event.type === 'keypress') {
@@ -82,18 +82,19 @@ $(document).keypress(function(event) {
 //     };
 
 
-    // GAME FUNCTIONS TO RUN ON EVERY KEYSTROKE 
-    highlightPressedKey(keyPress);
-    typewriterKeystrokeAudio.play();
-
-
     // START TIMING ON FIRST KEYSTROKE ONLY
     if (startTiming == false) {
         startTiming = true;
         startTime = new Date().getTime();
     };
-    
-    // GAME FUNCTIONS TO RUN ON EVERY KEYSTROKE UNTIL WE HIT ENDGAME
+
+
+    // GAME FUNCTIONS TO RUN ON EVERY KEYSTROKE 
+    highlightPressedKey(keyPress);
+    typewriterKeystrokeAudio.play();
+
+
+    // GAME FUNCTIONS TO RUN ON EVERY KEYSTROKE UNTIL ENDGAME
     if (endGame == false) {
         getNextLetter();
         placeNextExpectedLetter();
@@ -110,6 +111,7 @@ $(document).keypress(function(event) {
     
         
         // INITIAL THOUGHTS ON RESETTING THE GAME INSTEAD OF RELOADING: 
+        // SET INITIAL GAME STATE IN AN OBJECT, RECALL THAT OBJECT ON BUTTON CLICK
         // NEED TO RESET ENDGAME TO FALSE SOMEWHERE
         // NEED TO REMOVE TEXT-ALIGN CENTER FROM #SENTENCES ON RESET
         // NEED TO PUT YELLOW BOX BACK
