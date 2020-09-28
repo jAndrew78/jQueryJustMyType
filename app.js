@@ -61,27 +61,26 @@ $(document).keydown(function(e) {
     };
 });
 
-let keyPress;
 // DRIVE THE GAME BASED ON EVERYTHING THAT HAPPENS WHEN A KEY IS PRESSED
 $(document).keypress(function(event) {
     let keyPress = event.keyCode || event.which;
+    
 
+// WORKING ON ALLOWING CLICKS TO REGISTER ONSCREEN THE SAME AS VIA KEYPRESSES
+//   may need to seperate click and keypress into different event listeners
+// let keyPress;
 // $(document).on('click keypress', function(event) {
 //     if (event.type === 'keypress') {
 //         keyPress = event.keyCode || event.which;
+//         typewriterKeystrokeAudio.play();
 //     } else if (event.type === 'click') {
 //         $('.key').click(function() {
-//             keyPress = '';
 //             keyPress = $(this).attr('id')
-//             console.log(keyPress);
+//             typewriterKeystrokeAudio.play();
+//             // console.log(keyPress);
 //         })
 //     };
 
-
-//         // let clickedKey = $('key');
-//         // console.log(clickedKey);
-//         // keyPress = event.keyCode || event.which;    
-//     };
 
     // GAME FUNCTIONS TO RUN ON EVERY KEYSTROKE 
     highlightPressedKey(keyPress);
